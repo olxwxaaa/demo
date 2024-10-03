@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore the World</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Explore the World</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Destinations</a></li>
+                <li id="user-greeting"></li>
+                <li><a href="#" id="login-link">Log In</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="search-section">
+        <div class="search-container">
+            <h2>Find Your Next Adventure</h2>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search for a destination..." />
+                <button id="search-btn">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-destinations">
+        <h2>Featured Destinations</h2>
+        <div class="destination-grid" id="destination-grid">
+            <div class="destination-item" data-description="Greece is known for its stunning islands and ancient history.">
+                <img src="img/greece.jpeg" alt="Greece">
+                <h3>Greece</h3>
+                <p>Greece is known for its stunning islands and ancient history.</p>
+                <a href="greece.html" class="view-details-btn">View Details</a>
+            </div>
+            <div class="destination-item" data-description="Japan is famous for its unique blend of tradition and modernity.">
+                <img src="img/japan.jpeg" alt="Japan">
+                <h3>Japan</h3>
+                <p>Japan is famous for its unique blend of tradition and modernity.</p>
+                <a href="japan.html" class="view-details-btn">View Details</a>
+            </div>
+            <div class="destination-item" data-description="Oslo North is recognized for its beautiful nature and vibrant culture.">
+                <img src="img/oslonorth.jpeg" alt="Oslo North">
+                <h3>Oslo North</h3>
+                <p>Oslo North is recognized for its beautiful nature and vibrant culture.</p>
+                <a href="oslonorth.html" class="view-details-btn">View Details</a>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Display greeting message and handle logout
+        const username = localStorage.getItem('username');
+        const userGreeting = document.getElementById('user-greeting');
+        const loginLink = document.getElementById('login-link');
+
+        if (username) {
+            userGreeting.innerHTML = `Hello, <strong>${username}</strong>`;
+            loginLink.innerHTML = 'Log Out'; // Change link text to Log Out
+            loginLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                localStorage.removeItem('username'); // Clear username from localStorage
+                window.location.reload(); // Refresh the page to update the nav links
+            });
+        } else {
+            userGreeting.innerHTML = ''; // No greeting if not logged in
+            loginLink.innerHTML = 'Log In'; // Ensure Log In is displayed
+            loginLink.href = 'login.html'; // Set the link to go to the login page
+        }
+
+        document.getElementById('search-btn').addEventListener('click', function() {
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            const destinations = document.querySelectorAll('.destination-item');
+            let found = false;
+
+            destinations.forEach(destination => {
+                const description = destination.getAttribute('data-description').toLowerCase();
+                if (description.includes(searchInput)) {
+                    destination.style.display = 'block'; // Show matching destination
+                    found = true;
+                } else {
+                    destination.style.display = 'none'; // Hide non-matching destination
+                }
+            });
+
+            if (!found) {
+                alert('No matching destinations found.');
+            }
+        });
+    </script>
+</body>
+</html>

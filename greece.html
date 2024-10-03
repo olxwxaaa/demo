@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greece - Explore the World</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .destination-info {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .comment-section {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 800px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment-section h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .comment-section textarea {
+            width: 100%;
+            height: 120px;
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            resize: none;
+        }
+
+        .comment-section button {
+            padding: 12px 20px;
+            background-color: #5d5d5d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .comment-section button:hover {
+            background-color: #4a4a4a;
+        }
+
+        .comment {
+            border-top: 1px solid #eee;
+            padding: 10px 0;
+            margin-top: 10px;
+        }
+
+        .comment .username {
+            font-weight: bold;
+        }
+
+        .comment .timestamp {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        #comments-list {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Explore the World</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="#">Destinations</a></li>
+                <li id="user-greeting"></li>
+                <li><a href="login.html" id="login-link">Log In</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="destination-info">
+        <h2>Greece</h2>
+        <img src="img/greece.jpeg" alt="Greece" style="width: 100%; max-width: 600px;">
+        <p>Greece is known for its stunning islands and ancient history. From the beautiful beaches of Santorini to the historical ruins of Athens, Greece offers a rich blend of culture and adventure.</p>
+    </section>
+
+    <div class="comment-section">
+        <h2>Leave a Comment</h2>
+        <textarea id="comment-input" placeholder="Write your comment here..."></textarea>
+        <button id="post-comment-btn">Post Comment</button>
+        <div id="comments-list"></div>
+    </div>
+
+    <script>
+        // Retrieve the username from localStorage
+        const username = localStorage.getItem('username');
+
+        document.getElementById('post-comment-btn').addEventListener('click', function() {
+            const commentInput = document.getElementById('comment-input');
+            const commentsList = document.getElementById('comments-list');
+            const commentText = commentInput.value.trim();
+
+            if (commentText && username) {
+                // Get the current date and time in the desired format using JS
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const day = String(now.getDate()).padStart(2, '0');
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+
+                // Create the formatted date and time string
+                const formattedDateTime = `${month}/${day}/${year}, ${hours}:${minutes}:${seconds}`;
+
+                // Create a new comment element
+                const newComment = document.createElement('div');
+                newComment.className = 'comment';
+                
+                // Set the content with username and timestamp
+                newComment.innerHTML = `<span class="username">${username}</span> <span class="timestamp">(${formattedDateTime})</span><br>${commentText}`;
+
+                // Append the new comment to the comments list
+                commentsList.prepend(newComment); // Adds new comments at the top
+
+                // Clear the input
+                commentInput.value = '';
+            } else {
+                alert('Please log in to post a comment.');
+            }
+        });
+    </script>
+</body>
+</html>

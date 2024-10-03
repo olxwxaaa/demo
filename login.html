@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Explore the World</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* Navigation Bar Styles */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Login Section Styles */
+        .login-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 70px); /* Adjusted for header height */
+        }
+
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 300px; /* Fixed width for login box */
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .login-btn {
+            padding: 12px 20px;
+            background-color: #5d5d5d; /* Match grey color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 100%; /* Full width */
+        }
+
+        .login-btn:hover {
+            background-color: #4a4a4a; /* Darker grey on hover */
+        }
+
+        .signup-text {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Featured Destinations Styles */
+        .featured-destinations {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .destination-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap; /* Responsive layout */
+        }
+
+        .destination-item {
+            width: 200px; /* Fixed width for destination items */
+        }
+
+        .destination-item img {
+            width: 100%; /* Responsive image */
+            border-radius: 8px; /* Rounded corners */
+        }
+
+        .destination-item h3 {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Explore the World</h1>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="#">Destinations</a></li>
+                <li><a href="#" id="login-link">Log In</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Login Section -->
+    <section class="login-section">
+        <div class="login-container">
+            <h2>Log In to Your Account</h2>
+            <p>Please log in to continue exploring.</p>
+            <form id="login-form" onsubmit="return handleLogin(event)">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-btn">Log In</button>
+            </form>
+            <p class="signup-text">Don't have an account? <a href="#">Sign up here</a>.</p>
+        </div>
+    </section>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const username = document.getElementById('username').value;
+            localStorage.setItem('username', username); // Store username in localStorage
+            window.location.href = 'home.html'; // Redirect to home page
+        }
+    </script>
+</body>
+</html>
